@@ -6,8 +6,6 @@ $config = Get-Content -Path ".\config.json" | ConvertFrom-Json
 $repoDir = $config.stcuProjectsDir + $repo
 $obsidianVault = $config.obsidianVaultDir
 
-echo $obsidianVault
-
 # Save the current directory
 Push-Location
 
@@ -27,6 +25,7 @@ $issueTitle = $jsonObject.title
 
 $filename = $repo + " " + $issueNumber.ToString()
 $markdownFileName = $obsidianVault + $filename + ".md"
+$issueLink = "https://github.com/stcu/" + $repo + "/issues/" + $issueNumber
 
 $initialContent = ""
 $initialContent += "---"
@@ -35,9 +34,7 @@ $initialContent += "alias: [" + $issueTitle + "]"
 $initialContent += "`n"
 $initialContent += "---"
 $initialContent += "`n"
-$initialContent += "# " + "[[" + $filename + "|" + $issueTitle + "]]"
-$initialContent += "`n"
-$initialContent += "**Link**: https://github.com/stcu/" + $repo + "/" + $issueNumber
+$initialContent += "# " + "[" + $filename + "]"  + "(" + $issueLink + "): " + "[[" + $filename + "|" + $issueTitle + "]]"
 $initialContent += "`n"
 $initialContent += "## Log"
 $initialContent += "`n`n"
